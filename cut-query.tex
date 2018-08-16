@@ -1,0 +1,40 @@
+\section{Applications to Approximating Cut Queries}
+
+\begin{definition}
+	We say that a total ordering $\dot{<}$ of the vertices of a graph is \emph{$c$-treelike} if every vertex $u$ has at most $c$ neighbors $v$ such that $u~\dot{<}~v$. 
+\end{definition}
+\begin{lemma}
+	\label{lem_treelike}
+	Every $c$-uniformly sparse graph has a $2c$-treelike ordering. Moreover, this ordering can be computed in linear time.
+\end{lemma}
+\begin{proof}
+	Let $G$ be a $c$-uniformly sparse graph.
+	Let $v$ be the minimum degree vertex of $G$.
+	Note that $d(v) \leq 2c$.
+	We set $v$ to be the smallest in the ordering $\dot{<}$ and then recursively construct the remainder of the ordering on $G' = G \ \{v\}$.
+\end{proof}
+\begin{lemma}
+	Let $G = (V, E)$ be $c$-uniformly sparse.
+	After preprocessing in linear time and space, we can answer queries about the boundaries of subsets of vertices of $G$ in $O(ck)$ time, where $k$ is the size of the queried subset.
+\end{lemma}
+\begin{proof}
+	Using Lemma \ref{lem_treelike} we first compute a $2c$-treelike ordering $\dot{<}$ of $V$.
+	For every vertex $u \in V$, we store a list of edges $(u, v) \in E$ such that $u~\dot{<}~v$.
+	We also compute and store the weighted degree $wd(v)$ for every vertex of $G$.
+	
+	Assume we are given $S \subseteq V$.
+	We first compute the total weight $s_{internal}$ of edges internal to $S$.
+	To this end, for every vertex $u \in S$ we go through its neighbors that are larger in the ordering $\dot{<}$ and sum up the weights of edges that lead to $S$.
+	Note that every edge in $S \times S$ will be encountered exactly once.
+	The boundary of $S$ can be computed as
+	\begin{align*}
+		s_{cut} := \left(\sum_{v \in S} wd(v)\right) - 2s_{internal}. 
+	\end{align*}
+\end{proof}
+\begin{corollary}
+	Given a graph with $n$ vertices, there exists a data structure that:
+	\begin{itemize}
+	  \item achieves the construction time, storage space, and cut approximation guarantees of Spielman-Srivastava sparsifiers, and
+	  \item can compute approximate weights of cuts in $O(k \frac{\log n}{\epsilon^2})$ time, where $k$ is the size of the smaller side of the cut.
+	\end{itemize}
+\end{corollary}

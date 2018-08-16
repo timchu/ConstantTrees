@@ -1,0 +1,91 @@
+\section{Preliminaries}
+\subsection{Electrical Flows and Effective Resistance}
+
+Let graph G = (V, E, $c$) have edge weights $c_e$, where $c_e$ is the conductance of each edge.  Define the resistance $r_e$ on each edge to be $\frac{1}{c_e}$. 
+
+Let $L_G$ be the Laplacian of graph $G$. Let $\vv \in \mathbb{R}^|V|$ be the vector of voltages on the vertices of $V$.
+
+Let the vector $\chiv$ denote the vector of excess demand on each vertex. It's well known in the theory of electrical networks that
+\begin{equation}
+L_G \vv = \chiv,
+\end{equation}
+
+or equivalently,
+\begin{equation}
+\vv = L_G^{+} \chiv
+\end{equation}
+
+where $L_G^{+}$ is the Moore-Penrose pseudo-inverse of $L_G$.
+
+For edge $e = (i, j)$ with $i, j \in V$, the effective resistance $R_e(G)$ is defined as
+
+\begin{equation}
+R_e(G) = \frac{\chiv^TL_G^{+} \chiv}{2}
+\end{equation}
+
+where 
+\begin{equation}\label{chiv}
+   \chiv := \left\{
+     \begin{array}{ll}
+       1  &  x = i\\
+       -1 &  x = j\\
+       0  & \text{otherwise} 
+     \end{array}
+   \right.
+\end{equation} 
+
+The effective resistance of edge $e$ can be interpreted as the voltage drop across that edge given an flow of $1$ unit of current from $i$ to $j$. 
+
+When the underlying choice of graph $G$ is clear, $R_e(G)$ will be shortened to $R_e$.
+
+\begin{lemma} \label{effectresist}
+For all graphs $H$ that spectrally sparsify $G$, 
+\begin{equation}
+\left(\frac{1}{1+\epsilon}\right) R_e(H) < R_e(G) < (1+\epsilon) R_e(H)
+\end{equation}
+
+\begin{proof} This follows immediately from Equation \ref{1}, and substituting
+$$R_e(G) = \frac{\chiv^TL_G^{+} \chiv}{2}$$
+and
+$$R_e(H) = \frac{\chiv^TL_H^{+} \chiv}{2}.$$
+\end{proof}
+where $R_e(H)$ denotes the effective resistance of edge $e$ in $H$ and $R_e(G)$ denotes the effective resistance of $e$ in $G$.
+\end{lemma}
+\subsection{The Spielman-Srivastava Sparsifier}
+
+Spielman and Srivastava showed in \cite{SpielmanS08} that any graph can be sparsified with high probability using the following routine, for a large enough constant $C$: 
+
+\begin{itemize}
+\item For each edge, assign it a probability $p_e := \frac{R_ec_e}{(n-1)}$, where $R_e$ is the effective resistance of that edge and $c_e$ is the conductance (the inverse of the actual resistance) of that edge. Create a distribution on edges where each edge occurs with probability equal to $p_e$.
+\item Weight each edge to have conductance $\frac{c_e\epsilon^2}{(C n \log n) p_e}$, and sample $Cn \log n/\epsilon^2$ edges from this distribution.
+\end{itemize}
+
+We call such a scheme a Spielman-Srivastava sparsifying routine. Note that this scheme allows for multiple edges between any two vertices.
+\begin{remark} Sampling by \textit{approximate} effective resistances (as Spielman and Srivastava did in their original paper \cite{SpielmanS08}) will work in place of using exact values for effective resistances. The results in our paper will still go through; an approximation will still ensure that every edge has a relatively large weighting, which is what the result in our paper depends on.
+\end{remark}
+
+\subsection{The Marcus-Spielman-Srivastava Sparsifier}
+The following scheme from \cite{Srivastava13} produces a sparsifier with non-zero probability, for sufficiently large constants $C$:
+
+\begin{itemize}
+\item For each edge, assign it a probability $p_e := \frac{R_ec_e}{(n-1)}$, where $R_e$ is the effective resistance of that edge and $c_e$ is the conductance (inverse of actual resistance) of that edge. Create a distribution on edges where each edge occurs with probability equal to $p_e$.
+\item Weight each edge to have conductance $\frac{c_e\epsilon^2}{p_e(Cn)}$, and sample $C n/\epsilon^2$ edges from this distribution.
+\end{itemize}
+
+We call such a scheme a Marcus-Spielman-Srivastava sparsifying routine. Note that this scheme allows for multiple edges between any two vertices. 
+
+Note that the probability this routine returns a sparsifier may be expontentially small, and there is no known efficient algorithm to actually find such a sparsifier, making the \cite{SpielmanS08} result more algorithmically relevant.
+\subsection{Uniform Sparsity and Low Arboricity}
+
+\begin{definition}
+The \textbf{arboricity} of a graph $G$ is the equal to the minimum number of forests its edges can be decomposed into.
+\end{definition}
+\begin{definition}
+A graph G = (V, E, $c$) is said to be \textbf{$c$-uniformly sparse} if, for all subsets $V' \subset V$, the subgraph induced on $G$ by $V'$ contains no more than $c \cdot |V'|$ edges.
+\end{definition}
+
+\begin{lemma} \label{lowarb}
+Uniform Sparsity implies Low Arboricity. That is, if $G$ is $c$-uniformly sparse, then the arboricity of $G$ is no greater than $2c$.
+\end{lemma}
+This statement is proven in \ref{lem_treelike}.
+

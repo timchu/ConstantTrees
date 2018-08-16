@@ -1,0 +1,57 @@
+\begin{thebibliography}{CC18}
+
+\bibitem[AKW14]{AndoniKW14}
+Alexandr Andoni, Robert Krauthgamer, David Woodruff.
+\newblock The Sketching
+\\ Complexity of Graph Cuts.
+\newblock {\em CoRR}, abs/1403.7058, 2014.
+
+\bibitem[BSS09]{BatsonSS09}
+Joshua Batson, Daniel A. Spielman, and Nikhil Srivastava.
+\newblock Twice-Ramanujan
+\\ Sparsifiers.
+\newblock \textit{SIAM Review, Vol. $56$, Issue $2$, pp $315-334. 2014$}.
+
+\bibitem[BK96]{BenczurK96}
+Andras A. Benczur and David Karger.
+\newblock Approximating $s-t$ minimum cuts in $O(n^2)$ time.
+\newblock \textit{Proceedings of the 28th Annual ACM Symposium on Theory
+    of Computing, STOC '96.}. pages 47-55. New York, NY, USA, 1996. ACM.
+
+\bibitem[F61]{Foster61}
+R.M. Foster.
+\newblock An Extension of a Network Theorem
+\newblock IRE Trans. Circuit Theory, 8 (1961), pp.75-76.
+
+\bibitem[FH10]{FungH10}
+Wai Shing Fung, Nicholas J. A. Harvey
+\newblock Graph Sparsification by Edge-Connectivity and Random Spanning Trees
+\newblock {\em CoRR}, abs/1005.0265, 2010.
+
+\bibitem[KS18]{KyngS18}
+Rasmus Kyng, Zhao Song
+\newblock A Matrix Chernoff Bound for Strongly Rayleigh Distributions and Spectral Sparsifiers from a few Random Spanning Trees
+\newblock \textit{Foundations of Computer Science, 2018}.
+
+\bibitem[MSS13]{MarcusSS13}
+Adam Marcus, Daniel A. Spielman, and Nikhil Srivastava.
+\newblock Interlacing Families II: Mixed Characteristic Polynomials and the Kadison-Singer Problem.
+\newblock To appear in Annals of Mathematics.
+
+\bibitem[SS08]{SpielmanS08}
+Daniel A. Spielman and Nikhil Srivastava.
+\newblock Graph Sparsfiication by Effective
+\\Resistances.
+\newblock Conference version appeared in STOC '08.
+
+\bibitem[ST04]{SpielmanT04}
+Daniel A. Spielman and Shan-Hua Teng.
+\newblock Nearly-Linear Time Algorithms for Graph Partitioning, Graph Sparsification, and Solving Linear Systems
+\newblock \textit{Proceedings of the $36^{th}$ Annual ACM Symposium on Theory of Computing, pp. $81-90. 2004$}
+
+\bibitem[S13]{Srivastava13}
+Nikhil Srivastava.
+\newblock Discrepancy, Graphs, and the Kadison-Singer \\ Problem.
+\newblock http://windowsontheory.org/2013/07/11/discrepancy-graphs-and-the-kadison-singer-conjecture-2/
+
+\end{thebibliography}
