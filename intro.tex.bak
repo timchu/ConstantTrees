@@ -1,12 +1,12 @@
 \section{Introduction}
 
 \textbf{Graph Sparsifiers.} 
-Let $G$ be a graph with vertices $V(G)$, and
-edges $E(G)$, where $|V| = n$ and $|E| = m$. If $H$ is similar to $G$ under
-some appropriate measure with $V(G) = V(H)$, then $H$ can be used as a proxy for $G$ in
+Let $G$ be a graph with vertices $V$, and
+edges $E$, where $|V| = n$ and $|E| = m$. If $H$ is similar to $G$ under
+some appropriate measure, then $H$ can be used as a proxy for $G$ in
 computations. Benczur and Karger~\cite{BenczurK96} introduced the notion of a
-graph sparsifier, called a cut-sparsifier, where $H$ is a cut-sparsifier
-of $G$ if every cut in $H$ is within a $(1+\eps)$
+graph sparsifier (called a cut-sparsifier) where $H$ is a cut-sparsifier
+of $G$ (where $H$ has the same vertex set) if every cut in $H$ is within a $(1+\eps)$
 factor of the corresponding cut in $G$. 
 Spielman and Teng~\cite{SpielmanT04}
 introduced the notion of graph sparsification in the spectral setting.
@@ -42,7 +42,7 @@ on low-arboricity graphs, including approximate vertex cover,
 approximate dominating set, approximate independent set, approximate
 maximum matching, and more ~\cite{Solomon18, Suomeloa12, KuhnW05, LinSS12, GoelG06}. Furthermore, low arboricity graphs imply a
 vertex with low degree, which allows for fast Schur complementing (which
-is analogous to vertex sparsification)~\cite{AbrahamDKKP16}.
+is analagous to vertex sparsification)~\cite{AbrahamDKKP16}.
 
 % Low arboricity graphs have been used extensively in the last 40 years. 
 % ~\tim{Insert 10000 citations.}.
@@ -74,7 +74,7 @@ theorem:
   has arboricity $O(1/ \alpha)$.
 \end{theorem}
 
-This theorem has the following immediately corollaries: 
+This theroem has the following immediately corollaries: 
 \begin{corollary} \label{cor:ss}
   Any $\eps$-spectral-sparsifier constructed using the procedure of Spielman and
   Srivastava~\cite{SpielmanS08} has arboricity at most $O(\log n /
@@ -89,27 +89,23 @@ This theorem has the following immediately corollaries:
 
 \begin{corollary}\label{cor:kl}
   Any $\eps$-spectral-sparsifier constructed using the procedure of Kelner and
-  Levin~\cite{KelnerL13}, (rigorously proven in~\cite{Pachocki16,
-  KyngPPS16}),  plus a resparsification step at the end
-  (according to the definitions of resparsification found
-  in~\cite{KyngPPS16}), has arboricity at most
+  Levin~\cite{KelnerL13} (rigorously proven in~\cite{Pachocki16, KyngPPS16}) has arboricity at most
   $O(\log n / \eps^2)$.
 \end{corollary}
 This is as tight a bound as we can hope to get for each class of
 sparsifiers.
   
 \begin{corollary}\label{lem:res-sparse}
-  For any graph $G$, there exists a subgraph $H$ that is the union of a
-  nearly linear size graph and a graph with arboricity $O(\log^{O(1)} n
-  / \eps)$,
+  For any graph $G$, there exists a subgraph $H$ with arboricity $O(\log^{O(1)} n / \eps)$
   such that for all pairs of vertices $u$ and $v$ in $V(G)$, the effective resistance
   between them in graph $H$ is a $(1+\eps)$ approximation of the
   effective resistance between $u$ and $v$ in $G$.
 \end{corollary}
 Corollary~\ref{lem:res-sparse} reduces the $\epsilon$ dependency of the
 arboricity, compared to the sparsifiers in
-Corollaries~\ref{cor:ss},~\ref{cor:mss}~\ref{cor:kl}.  
-Proofs of Lemma~\ref{lem:main}, Theorem~\ref{thm:main}, and all the corollaries, will be given in
+Corollaries~\ref{cor:ss},~\ref{cor:mss}~\ref{cor:kl}.
+
+Proofs of our main theorem, and its corollaries, will be given in
 Section~\ref{sec:main} \tim{Build this section}.
 
 One other new result in our paper is that we show cut queries can be
@@ -128,19 +124,19 @@ This is formalized in Theorem~\ref{thm:cut-query}.
 Besides for cut queries, there is a long list of algorithms that run quickly on low arboricity
 graphs. These 
 which includes approximate maximum matching, approximate
-dominating set, approximate vertex cover, and many others ~\cite{Solomon18,
+dominating set, and approximate vertex cover~\cite{Solomon18,
 Suomeloa12, KuhnW05, LinSS12, GoelG06}. Our result immediately implies
-that fast algorithms for computing any of these can be run on any of the
-sparsifiers specified above. Approximate vertex cover on low-arboricity spectral
+that fast algorithms for computing any of these, exist given any of the
+spectral sparsifiers specified above. Approximate vertex cover on low-arboricity spectral
 sparsifiers has been used by Abraham et.al. in~\cite{AbrahamDKKP16} to
 compute $(1-\eps)$ undirected maximum bipartite flow.
 It remains an open question what the output of these algorithms on a
 spectral sparsifier $H$ of $G$, imply
-about the original graph $G$.
+about the original graph $G$.  
 
 The existence of $O(\log^2 n / \eps^2)$ sparsifiers has been previously
-implied by the results of Kyng and Song~\cite{KyngS18}, which shows that $O(\log^2
-n / \eps^2)$ random spanning trees (with edges re-weighted by their
-effective conductance) form a spectral sparsifier with high
+implied by Kyng and Song~\cite{KyngS18}, which shows that a $O(\log^2
+n / \eps^2)$ random spanning trees with edges re-weighted by their
+effective conductance, form a spectral sparsifier with high
 probability. It was previously known that this many random spanning
 trees was a cut-sparsifier with high probability~\cite{FungH10}. 

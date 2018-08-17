@@ -1,21 +1,20 @@
 \section{Conclusions}
 There exist a plethora of algorithms that run quickly on low arboricity
-graphs (referenced in the introduction), which we now know will run quickly on the various different
-types of sparsifiers considered in our paper. Leveraging low arboricity and the fast run time of these
+graphs. Leveraging low arboricity and the fast run time of these
 algorithms has been done by~\cite{AbrahamDKKP16}, to approximate maximum
 bipartite undirected flow quickly.
 
-It is an open question how other fast
+It is an open question how these fast
 algorithms on low arboricity graphs can be used to speed up a variety of
 other classical algorithms relevant in the field, possibly including
 many algorithms that rely on Schur complementing (such as Effective
-Resistance estimation, Matrix determinant calculation, computing Sparse Cholesky factorization, and
+Resistance estimation, Matrix determinant calculation, computing Sparse Cholesky factoizations, and
 more). \tim{cite}
 
 It also remains an open question whether other classes of sparsifiers,
-such as those in Spielman and Teng~\cite{SpielmanT04} and those in
-Batson, Spielman, and Srivastava~\cite{BatsonSS09}
-are necessarily low arboricity graphs. Lee et. al. recently
+such as those by Spielman and Teng~\cite{SpielmanT04}, those by
+Batson, Spielman, and Srivastava~\cite{BatsonSS09}, dynamic sparsifiers,
+  and others are necessarily low arboricity graphs. Lee et. al. recently
   showed how to find Batson-Spielman-Srivastava sparsifiers in nearly
   linear time. Ideas based on Spielman and Teng spectral sparsifiers have been used to create
   fast max-flow algorithms \tim{Citation for both needed}. It would be

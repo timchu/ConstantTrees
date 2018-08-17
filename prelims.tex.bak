@@ -3,7 +3,7 @@
 
 Let graph G = (V, E, $c$) have edge weights $c_e$, where $c_e$ is the conductance of each edge.  Define the resistance $r_e$ on each edge to be $\frac{1}{c_e}$. 
 
-Let $L_G$ be the Laplacian of graph $G$. Let $\vv \in \mathbb{R}^{|V|}$ be the vector of voltages on the vertices of $V$.
+Let $L_G$ be the Laplacian of graph $G$. Let $\vv \in \mathbb{R}^|V|$ be the vector of voltages on the vertices of $V$.
 
 Let the vector $\chiv$ denote the vector of excess demand on each vertex. It's well known in the theory of electrical networks that
 \begin{equation}
@@ -20,15 +20,15 @@ where $L_G^{+}$ is the Moore-Penrose pseudo-inverse of $L_G$.
 For edge $e = (i, j)$ with $i, j \in V$, the effective resistance $R_e(G)$ is defined as
 
 \begin{equation}
-R_e(G) = \frac{\chiuv^TL_G^{+} \chiuv}{2}
+R_e(G) = \frac{\chiv^TL_G^{+} \chiv}{2}
 \end{equation}
 
 where 
 \begin{equation}\label{chiv}
    \chiv := \left\{
      \begin{array}{ll}
-       1  &  x = u\\
-       -1 &  x = v\\
+       1  &  x = i\\
+       -1 &  x = j\\
        0  & \text{otherwise} 
      \end{array}
    \right.
@@ -44,7 +44,7 @@ For all graphs $H$ that spectrally sparsify $G$,
 \left(\frac{1}{1+\epsilon}\right) R_e(H) < R_e(G) < (1+\epsilon) R_e(H)
 \end{equation}
 
-\begin{proof} This is known in the literature~\cite{ChuGPSSW18}, and it follows immediately from Equation \ref{1}, and substituting
+\begin{proof} This follows immediately from Equation \ref{1}, and substituting
 $$R_e(G) = \frac{\chiv^TL_G^{+} \chiv}{2}$$
 and
 $$R_e(H) = \frac{\chiv^TL_H^{+} \chiv}{2}.$$
@@ -55,7 +55,7 @@ where $R_e(H)$ denotes the effective resistance of edge $e$ in $H$ and $R_e(G)$ 
 Leverage score sampling has been used in a number of
 settings~\cite{SpielmanS08, KelnerL13, Pachocki16, KyngPPS16,
   ChuGPSSW18}. In the context of graph Laplacians, leverage scores of an
-edge are interchangeable with $c_e \cdot R_e$, where $c_e$ represents
+edge are interchangeable with $c_e \cdot R_e$, where $c_e$ represnets
 the conductance of the edge and $R_e$ represents the effective
 resistance of that edge.
 
@@ -71,8 +71,8 @@ Spielman and Srivastava showed in \cite{SpielmanS08} that any graph can be spars
 We call such a scheme a Spielman-Srivastava sparsifying routine. Note
 that this scheme allows for multiple edges between any two vertices.
 The probability each edge is sampled is proportional the leverage score,
-    and the leverage score for any edge in the final graph is at least
-    $\Omega(\eps^2 / \log n)$.
+    ahd the leverage score for any edge sampled is at least
+    $O(\eps^2 / \log n)$.
 
 \begin{remark} Sampling by \textit{approximate} effective resistances (as Spielman and Srivastava did in their original paper \cite{SpielmanS08}) will work in place of using exact values for effective resistances. The results in our paper will still go through; an approximation will still ensure that every edge has a relatively large weighting, which is what the result in our paper depends on.
 \end{remark}
@@ -87,29 +87,28 @@ The following scheme from \cite{Srivastava13} produces a sparsifier with non-zer
 
 We call such a scheme a Marcus-Spielman-Srivastava sparsifying routine. Note that this scheme allows for multiple edges between any two vertices. 
 
-Note that the probability this routine returns a sparsifier may be exponentially small, and there is no known efficient algorithm to actually find such a sparsifier, making the \cite{SpielmanS08} result more algorithmically relevant.
+Note that the probability this routine returns a sparsifier may be expontentially small, and there is no known efficient algorithm to actually find such a sparsifier, making the \cite{SpielmanS08} result more algorithmically relevant.
 
-Note that the leverage score for any edge in the final graph is at least
-$\Omega(\eps^2)$, which follows from the way that the sampling procedure
-is constructed.
+Note that the leverage score for any edge sampled is at lesat
+$O(\eps^2)$.
 \subsection{The Kelner-Levin Sparsifier} \label{sec:kl}
 Kelner and Levin proposed a sparsifier in the semi-streaming setting,
        which is: one pass over a stream of edges is given, and the
-       memory allotted is the output size. How can one construct a
+       memory alotted is the output size. How can one construct a
        spectral sparsifier with $O(n \log n / \eps^2)$ edges?
 
-Their algorithm is quite simple: for each edge considered in the stream,
-      include it in the graph. If the graph's edge count exceeds the
-      alotted output size, re-sparsify the graph in such a way that the leverage score of each
-edge in our re-sparsified graph is bounded below (assuming that a 2-approximation for Leverage
+This sparsifier also ends using a leverage score sampling algorithm.
+Their algorithm is quite simple: include an edge, and if the edge count
+gets too high, re-sparsify in such a way that the leverage score of each
+edge kept is bounded above (assuming that a 2-approximation for Leverage
     score is used in Step 3(b) of the algorithm
     \textsc{StreamSparsify}
-    in~\cite{KyngPPS16}).
+    in~\cite{KyngPPS16}.
 
 This scheme was first introduced in ~\cite{KelnerL13}, and a rigorous
-proof was given in ~\cite{Pachocki16} and ~\cite{KyngPPS16}.  Of note is that, if a
+proof was given in ~\cite{Pachocki16, KyngPPS16}.  Of note is that, if a
 resparsification step is performed at the end, every edge in the final
-graph has leverage score at least $\Omega(\eps^2 / \log n )$. Call the output
+graph has leverage score at least $O(\eps^2 / \log n )$. Call the output
 of such a procedure a Kelner-Levin sparsifier.
 
 \subsection{Resistance Sparsifiers} \label{sec:res-sparse}
@@ -128,8 +127,7 @@ An $\eps$-resistance-sparsifier $H$ supported on the same vertex set of
   \textsc{NaiveCycleDecomposition}. This algorithm breaks the graph into a
   collection of short cycles, and a nearly linear number of edges.
   If \textsc{NaiveCycleDecomposition} is plugged into the algorithm
-  \textsc{SpectralSketch} in the same paper, then the resulting graph is
-  a resistance sparsifier with high probability, and
+  \textsc{SpectralSketch} in the same paper, then the resulting graph
   can be written as the union of a graph with a nearly linear number of edges,
   and a graph whose edges have leverage score (with respect to the entire
   graph) of $ \geq \Omega(\eps / log^{O(1)} n)$. Call such a sparsifier

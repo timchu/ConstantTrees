@@ -1,4 +1,4 @@
-\section{Low Arboricity Spectral Sparsifiers}\label{sec:main}
+\section{Low Arboricity Sparsifiers}\label{sec:main}
 
 In this section, we prove Theorem~\ref{thm:main} and its associated
 corollaries. First we establish some preliminary lemmas. Throughout, we assume graph
@@ -45,7 +45,7 @@ Now we are ready to prove Lemma~\ref{lem:main}, which states that the subgraph
 $H$ of graph $G$ has arboricity $O(1/\alpha)$, where $H$ consists of the edges with leverage score in
 $G$ greater than $\alpha$.
 \begin{proof} (of Lemma~\ref{lem:main})
-  We show that $H$ is uniformly sparse.  By Lemma~\ref{lem:lowarb}, this would prove the
+  We show that $H$ is has uniform sparsity of $O(1/\alpha)$.  By Lemma~\ref{lem:lowarb}, this would prove the
   arboricity is $O(1/ \alpha)$.
   Let $S$ be any vertex subset of $V(G)$. Then: we know that the sum of
   $c_e R_e(G)$ on $S$ is at most $|S|-1$, by Foster's Theorem and
@@ -72,7 +72,7 @@ $O(\eps^2)$~\cite{Srivastava13, MarcusSS13}.
 Therefore, by Theorem~\ref{thm:main}, they have a arboricity of at most $O(1/\eps^2)$.
 \end{proof}
 This proves Corollary~\ref{cor:mss}. Now we prove that Spielman
-Srivastava sparsifiers are uniformly sparse.
+Srivastava sparsifiers have lwo arboricity.
 
 \begin{theorem} 
 Spielman-Srivastava sparsifiers have arboricity
