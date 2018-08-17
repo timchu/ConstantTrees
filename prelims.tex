@@ -51,6 +51,14 @@ $$R_e(H) = \frac{\chiv^TL_H^{+} \chiv}{2}.$$
 \end{proof}
 where $R_e(H)$ denotes the effective resistance of edge $e$ in $H$ and $R_e(G)$ denotes the effective resistance of $e$ in $G$.
 \end{lemma}
+\subsection{Leverage Scores}
+Leverage score sampling has been used in a number of
+settings~\cite{SpielmanS08, KelnerL13, Pachocki16, KyngPPS16,
+  ChuGPSSW18}. In the context of graph Laplacians, leverage scores of an
+edge are interchangeable with $c_e \cdot R_e$, where $c_e$ represents
+the conductance of the edge and $R_e$ represents the effective
+resistance of that edge.
+
 \subsection{The Spielman-Srivastava Sparsifier}
 
 Spielman and Srivastava showed in \cite{SpielmanS08} that any graph can be sparsified with high probability using the following routine, for a large enough constant $C$: 
@@ -60,7 +68,12 @@ Spielman and Srivastava showed in \cite{SpielmanS08} that any graph can be spars
 \item Weight each edge to have conductance $\frac{c_e\epsilon^2}{(C n \log n) p_e}$, and sample $Cn \log n/\epsilon^2$ edges from this distribution.
 \end{itemize}
 
-We call such a scheme a Spielman-Srivastava sparsifying routine. Note that this scheme allows for multiple edges between any two vertices.
+We call such a scheme a Spielman-Srivastava sparsifying routine. Note
+that this scheme allows for multiple edges between any two vertices.
+The probability each edge is sampled is proportional the leverage score,
+    and the leverage score for any edge sampled is at least
+    $O(\eps^2 / \log n)$.
+
 \begin{remark} Sampling by \textit{approximate} effective resistances (as Spielman and Srivastava did in their original paper \cite{SpielmanS08}) will work in place of using exact values for effective resistances. The results in our paper will still go through; an approximation will still ensure that every edge has a relatively large weighting, which is what the result in our paper depends on.
 \end{remark}
 
@@ -74,7 +87,52 @@ The following scheme from \cite{Srivastava13} produces a sparsifier with non-zer
 
 We call such a scheme a Marcus-Spielman-Srivastava sparsifying routine. Note that this scheme allows for multiple edges between any two vertices. 
 
-Note that the probability this routine returns a sparsifier may be expontentially small, and there is no known efficient algorithm to actually find such a sparsifier, making the \cite{SpielmanS08} result more algorithmically relevant.
+Note that the probability this routine returns a sparsifier may be exponentially small, and there is no known efficient algorithm to actually find such a sparsifier, making the \cite{SpielmanS08} result more algorithmically relevant.
+
+Note that the leverage score for any edge sampled is at least
+$O(\eps^2)$.
+\subsection{The Kelner-Levin Sparsifier} \label{sec:kl}
+Kelner and Levin proposed a sparsifier in the semi-streaming setting,
+       which is: one pass over a stream of edges is given, and the
+       memory allotted is the output size. How can one construct a
+       spectral sparsifier with $O(n \log n / \eps^2)$ edges?
+
+This sparsifier also ends using a leverage score sampling algorithm.
+Their algorithm is quite simple: include an edge, and if the edge count
+gets too high, re-sparsify in such a way that the leverage score of each
+edge kept is bounded above (assuming that a 2-approximation for Leverage
+    score is used in Step 3(b) of the algorithm
+    \textsc{StreamSparsify}
+    in~\cite{KyngPPS16}.
+
+This scheme was first introduced in ~\cite{KelnerL13}, and a rigorous
+proof was given in ~\cite{Pachocki16, KyngPPS16}.  Of note is that, if a
+resparsification step is performed at the end, every edge in the final
+graph has leverage score at least $O(\eps^2 / \log n )$. Call the output
+of such a procedure a Kelner-Levin sparsifier.
+
+\subsection{Resistance Sparsifiers} \label{sec:res-sparse}
+An $\eps$-resistance-sparsifier $H$ supported on the same vertex set of
+  graph $G$, is a graph where
+  effective resistance between two vertices in $H$ is within a $(1+\eps)$ multiplicative
+  factor of the corresponding two vertices in $G$. This notion was first
+  introduced in ~\cite{DinitzKW15}.
+
+  The paper of Chu et.al.~\cite{ChuGPSSW18} showed that there exist
+  resistance sparsifiers of size $O(n \log^{O(1)} n / \eps)$. This is
+  done via a tool called short-cycle decompositions (decomposing a graph
+  into short cycles and a small number of residual edges).
+
+  In that paper, Chu et.al. gives a short cycle decomposition algorithm called
+  \textsc{NaiveCycleDecomposition}. This algorithm breaks the graph into a
+  collection of short cycles, and a nearly linear number of edges.
+  If \textsc{NaiveCycleDecomposition} is plugged into the algorithm
+  \textsc{SpectralSketch} in the same paper, then the resulting graph
+  can be written as the union of a graph with a nearly linear number of edges,
+  and a graph whose edges have leverage score (with respect to the entire
+  graph) of $ \geq \Omega(\eps / log^{O(1)} n)$. Call such a sparsifier
+  a Chu-Gao-Peng-Sachdeva-Sawlani-Wang sparsifier.
+
 \subsection{Uniform Sparsity and Low Arboricity}
 
 \begin{definition}
@@ -84,8 +142,8 @@ The \textbf{arboricity} of a graph $G$ is the equal to the minimum number of for
 A graph G = (V, E, $c$) is said to be \textbf{$c$-uniformly sparse} if, for all subsets $V' \subset V$, the subgraph induced on $G$ by $V'$ contains no more than $c \cdot |V'|$ edges.
 \end{definition}
 
-\begin{lemma} \label{lowarb}
+\begin{lemma} \label{lem:lowarb}
 Uniform Sparsity implies Low Arboricity. That is, if $G$ is $c$-uniformly sparse, then the arboricity of $G$ is no greater than $2c$.
 \end{lemma}
-This statement is proven in \ref{lem_treelike}.
+This statement is known in the literature, and is not difficult to show.
 

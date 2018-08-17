@@ -1,6 +1,9 @@
-\section{The Main Result}
+\section{Low Arboricity Spectral Sparsifiers}\label{sec:main}
 
-First we establish some preliminary lemmas.
+In this section, we prove Theorem~\ref{thm:main} and its associated
+corollaries. First we establish some preliminary lemmas. Throughout, we assume graph
+$G$ is connected, and $G = (V, E, c)$ where $c_e \forall e \in E$
+represents the edge weights (conductances) of graph $G$. 
 \begin{lemma} \label{foster}
 \textit{(Foster's Resistance Theorem)} Let $G = (V, E, c)$ be any graph. Then 
 \begin{equation}
@@ -8,9 +11,12 @@ First we establish some preliminary lemmas.
 \end{equation}
 where $n:=|V|$. \text{\cite{Foster61}}
 \end{lemma}
+This is equivalent to saying: the sum of leverage scores in any graph is
+exactly $n-1$, which is the rank of $L_G$.
 
-\begin{lemma} \label{monotone}
-\textit{(Effective Resistances of edges in a subgraph are higher than in the original graph)} Let $H$ be a subgraph of $G = (V, E, c)$, where $L_H$ is treated as a linear operator from $\mathbb{R}^{|V|}$ to $\mathbb{R}^{|V|}$. Then
+\begin{lemma} \label{lem:monotone}
+\textit{(Subgraph Effective Resistances are Higher than Graph Effective
+    Resistances)} Let $H$ be a subgraph of $G = (V, E, c)$, where $L_H$ is treated as a linear operator from $\mathbb{R}^{|V|}$ to $\mathbb{R}^{|V|}$. Then
 
 \begin{equation}\label{lem} 
 x^T L_H^+ x \geq x^T L_G^+ x
@@ -20,63 +26,84 @@ for all $x \in \mathbb{R}^{|V|}$ orthogonal to the nullspace of $L_H$.
 
 \end{lemma}
 
-\begin{proof}
-Let $x = L_G^{\frac{1}{2}}y$ and $y=(L_G^+)^\frac{1}{2}x$. Now Equation \ref{lem} is equivalent to the equation
+Lemma~\ref{lem:monotone} is known in the literature.
+%but we provide a proof
+% here for completeness.
+% \begin{proof}
+% Let $x = L_G^{\frac{1}{2}}y$ and $y=(L_G^+)^\frac{1}{2}x$. Now Equation \ref{lem} is equivalent to the equation
+% 
+% \begin{equation}
+% y^T \left(L_G^\frac{1}{2} L_H^+ L_G^\frac{1}{2}\right) y \geq y^T y
+% \end{equation}
+% 
+% holding true for all vectors $y \in \mathbb{R}^{|V|}$.
+% 
+% Since $x$ is assumed to be orthogonal to the nullspace of $L_H$ (which equals the nullspace of $L_H^+$), it follows that $y$ is orthogonal to the nullspace of $L_G^\frac{1}{2} L_H^+ L_G^\frac{1}{2}$. Therefore it suffices to show that all the non-zero eigenvalues of $L_G^\frac{1}{2} L_H^+ L_G^\frac{1}{2}$ are greater than $1$. 
+% This is equivalent to showing that all the non-zero eigenvalues of $\left(L_G^+ \right)^\frac{1}{2} L_H \left(L_G^+ \right)^\frac{1}{2}$ are less than $1$, a fact which follows immediately from Rayleigh monotonicity.
+% \end{proof}
+Now we are ready to prove Lemma~\ref{lem:main}, which states that the subgraph
+$H$ of graph $G$ has arboricity $O(1/\alpha)$, where $H$ consists of the edges with leverage score in
+$G$ greater than $\alpha$.
+\begin{proof} (of Lemma~\ref{lem:main})
+  We show that $H$ is uniformly sparse.  By Lemma~\ref{lem:lowarb}, this would prove the
+  arboricity is $O(1/ \alpha)$.
+  Let $S$ be any vertex subset of $V(G)$. Then: we know that the sum of
+  $c_e R_e(G)$ on $S$ is at most $|S|-1$, by Foster's Theorem and
+  Lemma~\ref{lem:monotone}.
 
-\begin{equation}
-y^T \left(L_G^\frac{1}{2} L_H^+ L_G^\frac{1}{2}\right) y \geq y^T y
-\end{equation}
-
-holding true for all vectors $y \in \mathbb{R}^{|V|}$.
-
-Since $x$ is assumed to be orthogonal to the nullspace of $L_H$ (which equals the nullspace of $L_H^+$), it follows that $y$ is orthogonal to the nullspace of $L_G^\frac{1}{2} L_H^+ L_G^\frac{1}{2}$. Therefore it suffices to show that all the non-zero eigenvalues of $L_G^\frac{1}{2} L_H^+ L_G^\frac{1}{2}$ are greater than $1$. 
-This is equivalent to showing that all the non-zero eigenvalues of $\left(L_G^+ \right)^\frac{1}{2} L_H \left(L_G^+ \right)^\frac{1}{2}$ are less than $1$, a fact which follows immediately from Rayleigh monotonicity.
+  Therefore,  the set of edges with $c_e R_e(G) > \alpha$ must have at
+  most $O(|S|/\alpha)$ edges between two vertices in $S$, by
+  Markov's inequality.  This holds for all subsets $S$, and thus implies
+  uniform sparsity of $O(1/\alpha)$
 \end{proof}
+Theorem~\ref{thm:main} follows directly from Lemma~\ref{lem:main}.
 
-\begin{lemma} \label{sumresist}
-Let $V' \subset V$. Let $G'$ be the subgraph of $G$ induced by $V'$, and let $E'$ be the edges of the induced subgraph. 
-Then 
-\begin{equation}
-\sum_{e \in E'} R_e(G)c_e \leq |V'|-1
-\end{equation}
-\end{lemma}
-
-\begin{proof} Note that $R_e = \frac{1}{2} \chiv L_G \chiv$, where $\chiv$ is defined as in Equation \ref{chiv}. Since $e$ is an edge of subgraph $H$, it follows that $\chiv$ is orthogonal to the nullspace of $L_H$. Thus we can apply Lemma \ref{monotone} and Lemma \ref{foster} to show that
-
-\begin{equation}
-\sum_{e \in E'} R_e(G)c_e \leq \sum_{e \in E'} R_e(G')c_e =|V'|-1
-\end{equation}
-
-as desired.
-\end{proof}
-
-\begin{theorem}\label{main}
+\begin{theorem}
 Marcus-Spielman-Srivastava sparsifiers are $O(1/\epsilon^2)$-uniformly sparse.
 \end{theorem}
 
 \begin{proof} 
-For each edge included in the graph by the Marcus-Spielman-Srivastava sampling scheme, they're included in the graph with weight $\frac{c_e\epsilon^2}{p_e(Cn)}$.  Therefore, by Lemma \ref{effectresist}, the value of $R_e(H)c_e(H)$ on edge $e$ is within a $(1+\epsilon)$ multiple of
+For each edge included in the graph by the Marcus-Spielman-Srivastava
+sampling scheme, they're designed with the property that each edge is
+sampled with probability proportional to their leverage score, and each
+edge in the final graph has leverage score at least
+$O(\eps^2)$~\cite{Srivastava13, MarcusSS13}.
 
-\begin{equation}
-R_e(G)c_e(H) = R_e \cdot \frac{c_e \epsilon^2}{(Cn)p_e} = R_e \cdot \frac{c_e\epsilon^2}{Cn} \cdot\frac{(n-1)}{R_ec_e} \geq \epsilon^2/(2C).
-\end{equation}
-
-Here, $R_e(H)$ and $c_e(H)$ denote the effective resistance and conductance of edge $e$ in graph $H$ respectively, and $R_e$ and $c_e$ denote the effective resistance and conducatnce of edge $e$ in graph $G$ respectively.
-
-\vspace{2 mm}
-Using Lemma \ref{sumresist}, it follows that the subgraph induced by $V'$ has no more than $2C(|V'|-1)/\epsilon^2$ edges. This implies that any subgraph of a Marcus-Spielman-Srivastava sparsifier is sparse.
+Therefore, by Theorem~\ref{thm:main}, they have a arboricity of at most $O(1/\eps^2)$.
 \end{proof}
-\begin{corollary}
-Marcus-Spielman-Srivastava sparsifiers have $O(1/\epsilon^2)$ arboricity.
-\end{corollary}
+This proves Corollary~\ref{cor:mss}. Now we prove that Spielman
+Srivastava sparsifiers are uniformly sparse.
 
 \begin{theorem} 
-Spielman-Srivastava sparsifiers are $O\left(\frac{\log n}{\epsilon^2}\right)$-uniformly sparse.
+Spielman-Srivastava sparsifiers have arboricity
+$O\left(\frac{\log n}{\epsilon^2}\right)$.
 \end{theorem}
 \begin{proof}
-The proof is identical to the the proof of Theorem \ref{main}, with $Cn$ replaced with $Cn\log n$.
+Spielman Srivastava sparsifiers are designed such that the leverage
+score of any edge in the final graph is at most
+$O(\eps^2 / \log n)$~\cite{SpielmanS08}.
+This implies that they have arboricity
+at most $O(1/\eps^2)$.
 \end{proof}
-\begin{corollary}
-Spielman-Srivastava sparsifiers have arboricity $O(\frac{\log n}{\epsilon^2})$.
-\end{corollary}
+This proves Corollary~\ref{cor:ss}.
 
+\begin{theorem} 
+Kelner-Levin spectral sparsifiers, in the semi-streaming setting, have arboricity $O( \log n /
+    \eps^2)$.
+\end{theorem}
+\begin{proof}
+This follows on Theorem~\ref{thm:main} and the bounds on the leverage score of edges in the
+Kelner-Levin sparsifier established in Section~\ref{sec:kl}.
+\end{proof}
+
+\begin{theorem} 
+Chu-Gao-Peng-Sachdeva-Sawlani-Wang resistance sparsifiers can be written
+as the union of a graph with nearly linear number of edges, and a graph
+with arboricity bounded by
+$O(\log^{O(1)}n / \eps)$.
+\end{theorem}
+\begin{proof}
+This follows from Theorem~\ref{thm:main}, and the remarks in
+Chu-Gao-Peng-Sachdeva-Sawlani-Wang sparsifier established in
+Section~\ref{sec:res-sparse}.
+\end{proof}

@@ -1,5 +1,31 @@
-\section{Final Note}
-Similar techniques to those presented can show that if the vertices of graph $G$ are ordered by the sum of $R_ec_e$ on edges that have an endpoint of that vertex, any graph has a sparsifier that can be written as the union of $O(1/\epsilon^2)$ trees with that topological ordering on their vertices. The proof uses the same machinery as that presented above (with a slightly different use of the Marcus-Spielman-Srivastava sampling scheme), and we omit the full proof here.
+\section{Conclusions}
+There exist a plethora of algorithms that run quickly on low arboricity
+graphs. Leveraging low arboricity and the fast run time of these
+algorithms has been done by~\cite{AbrahamDKKP16}, to approximate maximum
+bipartite undirected flow quickly.
 
-Thanks to Jakub Pachocki, Richard Peng, and Gary Miller for helpful
-conversations.
+It is an open question how these fast
+algorithms on low arboricity graphs can be used to speed up a variety of
+other classical algorithms relevant in the field, possibly including
+many algorithms that rely on Schur complementing (such as Effective
+Resistance estimation, Matrix determinant calculation, computing Sparse Cholesky factorization, and
+more). \tim{cite}
+
+It also remains an open question whether other classes of sparsifiers,
+such as those by Spielman and Teng~\cite{SpielmanT04}, those by
+Batson, Spielman, and Srivastava~\cite{BatsonSS09}, dynamic sparsifiers,
+  and others are necessarily low arboricity graphs. Lee et. al. recently
+  showed how to find Batson-Spielman-Srivastava sparsifiers in nearly
+  linear time. Ideas based on Spielman and Teng spectral sparsifiers have been used to create
+  fast max-flow algorithms \tim{Citation for both needed}. It would be
+  interesting to determine whether or not these sparsifiers have low
+  arboricity, and if so, what kinds of fast algorithms can be run on
+  them.
+
+Thanks to Michael Cohen, Jakub Pachocki, Richard Peng, and Gary Miller
+for helpful conversations. As mentioned earlier, an earlier version of
+this work from 2014 with Michael Cohen, Jakub Pachocki, and Richard Peng
+(which was never published until August 2018) contained many 
+of the main results, and was recently posted to
+ArXiv. This paper represents a modernized version of the same result,
+which was never submitted for publication outside of ArXiv, plus a few extra lemmas.

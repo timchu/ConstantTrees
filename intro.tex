@@ -4,11 +4,11 @@
 Let $G$ be a graph with vertices $V$, and
 edges $E$, where $|V| = n$ and $|E| = m$. If $H$ is similar to $G$ under
 some appropriate measure, then $H$ can be used as a proxy for $G$ in
-computations. Benczur and Karger~\cite{BK96} introduced the notion of a
+computations. Benczur and Karger~\cite{BenczurK96} introduced the notion of a
 graph sparsifier (called a cut-sparsifier) where $H$ is a cut-sparsifier
 of $G$ (where $H$ has the same vertex set) if every cut in $H$ is within a $(1+\eps)$
 factor of the corresponding cut in $G$. 
-Spielman and Teng~\cite{SpielmanT04} \tim{Insert this citation}
+Spielman and Teng~\cite{SpielmanT04}
 introduced the notion of graph sparsification in the spectral setting.
 The Laplacian of $G$ is the unique symmetric matrix $L_G$ such that for
 all vectors $x \in \mathbb{R}^n$, we have $x^T L_G x = \sum_{(u,v) \in
@@ -18,83 +18,125 @@ E} (x_u - x_v)^2$. $H$ is an $\eps$-spectral-sparsifier of $G$ if:
   (1-\eps) \xx^TL_G\xx \leq \xx^TL_H\xx \leq (1+\epsilon)\xx^TL_G\xx.
 \end{equation}
 
-Spielman and Teng \cite{SpielmanT04} showed that spectral sparsifiers
-can be constructed in $O(n \log^{O(1)} n / \eps^2)$ time. They also
+Spielman and Teng~\cite{SpielmanT04} showed that $\eps$-spectral-sparsifiers
+can be constructed in
+\\
+$O(n \log^{O(1)} n / \eps^2)$ time. They also
 demonstrated that a spectral sparsifier is a cut-sparsifier, by
-restricting $\xx \in \{0, 1\}^n$. 
+restricting $\xx \in \{0, 1\}^n$.  Spielman and Srivastava later proved
+that $\eps$-spectral sparsifiers with $O(n \log^2 n / \eps^2)$ edges can be
+constructed in nearly linear time via leverage score sampling~\cite{SpielmanS08}.
 
 \textbf{Arboricity.} For a graph $G$, the arboricity $A(G)$ of the graph
 is the smallest integer $k$ such that there exists forests $T_1, T_2,
 \ldots T_k$ which are subgraphs of $G$ such that their union is $G$.
-Arboricity has been studied in the context of local algorithms
-\tim{Citation needed}, real-world sparse graphs, fixed-parameter
-tractable algorithms \tim{Citation needed}, minor-closed graph families,
-and more. They have been applied in \tim{Cite Richard's papers}.
-Furthermore, a considerable range of algorithms are known to run quickly
+This measure is equivalent, up to a factor of 2, to the maximum average
+degree of any subgraph. Hence, arboricity can be viewed as a measure of
+uniform sparsity.
+
+Arboricity has been studied in the context of local
+algorithms~\cite{Solomon18}, fixed-parameter
+tractable algorithms~\cite{LinSS12, Solomon18}, minor-closed graph
+families, and more. A considerable range of algorithms are known to run quickly
 on low-arboricity graphs, including approximate vertex cover,
 approximate dominating set, approximate independent set, approximate
-maximum matching, and more.
+maximum matching, and more ~\cite{Solomon18, Suomeloa12, KuhnW05, LinSS12, GoelG06}. Furthermore, low arboricity graphs imply a
+vertex with low degree, which allows for fast Schur complementing (which
+is analogous to vertex sparsification)~\cite{AbrahamDKKP16}.
 
-In our paper, we show that a range of spectral sparsiifers whose
-construction is based on leverage scores, have constant
-or nearly constant
-arboricity. The existence of $O(\log^2 n / \eps^2)$ sparsifiers is
-implied by~\cite{KyngS18}, and low arboricity spectral sparsifiers are
-constructed in \tim{Cite the Richard thing}. Our paper's core
-contribution is showing that for \textit{any} graph, the set of edges
+% Low arboricity graphs have been used extensively in the last 40 years. 
+% ~\tim{Insert 10000 citations.}.
+
+\subsection{Contributions and Previous Work}
+
+We show that any graph $G$ admits a subgraph $H$ that is a
+$\eps$-spectral-sparsifiers with arboricity
+$O(1/\eps^2)$. We also show that a range of spectral sparsifiers,
+including
+the Spielman Srivastava sparsifier ~\cite{SpielmanS08} have nearly
+constant arboricity. This implies that all algorithms that run quickly on low
+arboricity graphs run quickly on such sparsifiers.
+
+Our paper's main lemma, with a simple proof,
+is showing that for \textit{any} graph, the subset of edges
 with leverage scores higher than $\alpha$ form a subgraph with
-arboricity at most $O(1/ \alpha)$. This directly implies the following
+arboricity at most $O(1/ \alpha)$.
+
+\begin{lemma} \label{lem:main} For any graph $G$, the subgraph $H$ of
+  edges with leverage score $ > \alpha$ has arboricity $O(1 / \alpha)$.
+\end{lemma}
+
+This directly implies the following
 theorem:
 
-\begin{theorem}
+\begin{theorem}\label{thm:main}
   For any graph $G$ whose leverage scores are all $ > \alpha$, graph $G$
   has arboricity $O(1/ \alpha)$.
 \end{theorem}
 
-Since many sparsifiers are based on leverage score sampling, we can
-immediately apply this result to bound the arboricity of these
-sparsifiers. This is codified in the following corollaries:
-
-\begin{corollary} 
-  Any $\eps$-sparsifier constructed using the procedure of Spielman and
+This theorem has the following immediately corollaries: 
+\begin{corollary} \label{cor:ss}
+  Any $\eps$-spectral-sparsifier constructed using the procedure of Spielman and
   Srivastava~\cite{SpielmanS08} has arboricity at most $O(\log n /
-  \eps^2$).
+  \eps^2)$.
 \end{corollary}
 
-Srisvastava sparsifiers are 
-
-We do this by using the following core theorem:
-
-\begin{theorem} Let 
-
-Spielman and Srivastava proved in \cite{SpielmanS08} that every graph
-has a $(1+\eps)$ spectral sparsifier with $O\left(\frac{n \log n}{\epsilon^2}\right)$ edges using an edge sampling routine. Batson, Spielman, and Srivastava proved in \cite{BatsonSS09} that there exist $(1+\epsilon)$-spectral sparsifiers of graphs with $O(n/\epsilon^2)$ edges.  Furthermore, the Marcus-Spielman-Srivastava proof of the Kadison-Singer conjecture in \cite{MarcusSS13} can be used to show that the edge sampling routine of \cite{SpielmanS08} gives an $(1+\epsilon)$-spectral sparsifier with $O(n/\epsilon^2)$ edges, with non-zero probability. \cite{Srivastava13}
-
-\tim{Insert definition and comments about Leverage Score.}
-
-Our core result is showing that for any graph, the set of edges with
-leverage score greater than $\alpha$ has arboricity at least
-$\frac{1}{\alpha}$. Since sparsifiers. 
-This has the following immediate corollaries:
-
-\begin{corollary} Any Spielman-Srivastava sparsifier has arboricity at
-  most $O\left(\frac{\log n}{\epsilon^2}\right)$.
+\begin{corollary}\label{cor:mss}
+  There exists an
+  $\eps$-spectral-sparsifier with $O(1/\eps^2)$ arboricity for any graph
+  $G$.
 \end{corollary}
 
-\begin{corollary}
-The Marcus-Spielman-Srivastava sparsifiers has arboricity at most $O(1/\epsilon^2)$
-\end{corollary}
-\begin{corollary}
-  The Kelner-Levin semi-streaming sparsifiers has at most
-  $O(log^2 n /\epsilon^2)$ arboricity.
-\end{corollary}
-\begin{corollary}
-  The Chu-Gao-Peng-Sachdeva-Sawlani-Wang resistance sparsifiers has at most
-  $O(n^{o(1)}/\epsilon)$ arboricity.
+\begin{corollary}\label{cor:kl}
+  Any $\eps$-spectral-sparsifier constructed using the procedure of Kelner and
+  Levin~\cite{KelnerL13} (rigorously proven in~\cite{Pachocki16, KyngPPS16}) has arboricity at most
+  $O(\log n / \eps^2)$.
 \end{corollary}
 This is as tight a bound as we can hope to get for each class of
 sparsifiers.
+  
+\begin{corollary}\label{lem:res-sparse}
+  For any graph $G$, there exists a subgraph $H$ with arboricity $O(\log^{O(1)} n / \eps)$
+  such that for all pairs of vertices $u$ and $v$ in $V(G)$, the effective resistance
+  between them in graph $H$ is a $(1+\eps)$ approximation of the
+  effective resistance between $u$ and $v$ in $G$.
+\end{corollary}
+Corollary~\ref{lem:res-sparse} reduces the $\epsilon$ dependency of the
+arboricity, compared to the sparsifiers in
+Corollaries~\ref{cor:ss},~\ref{cor:mss}~\ref{cor:kl}.
 
-Our result can be applied to approximating cut queries efficiently.
-As shown by Andoni, Krauthgamer, and Woodruff in \cite{AndoniKW14}, any sketch of a graph that w.h.p. preserves all cuts in an $n$-vertex graph must be of size $\Omega(n/\epsilon^2)$ bits.
-We show that the Spielman-Srivastava sparsifiers, in addition to achieving nearly optimal construction time and storage space, can also be made to achieve the nearly optimal query time $O\left(|S|\frac{\log n}{\epsilon^2}\right)$ when estimating the boundary of $S \subseteq V$, compared to the trivial query time of $O\left(n\frac{\log n}{\epsilon^2}\right)$.
+Proofs of our main theorem, and its corollaries, will be given in
+Section~\ref{sec:main} \tim{Build this section}.
+
+One other new result in our paper is that we show cut queries can be
+calculated in nearly optimal time on low-arboricity graphs.
+As shown by Andoni, Krauthgamer, and Woodruff in \cite{AndoniKW14},
+any sketch of a graph that w.h.p.
+preserves all cuts in an $n$-vertex graph must be of size
+$\Omega(n/\epsilon^2)$ bits.
+Using Spielman-Srivastava sparsifiers, we can achieve the
+nearly optimal query time $O\left(|S|\frac{\log n}{\epsilon^2}\right)$
+when estimating the boundary of $S \subseteq V$, compared to the trivial
+query time of $O\left(n\frac{\log n}{\epsilon^2}\right)$. This proof
+hinges on the low arboricity of Spielman Srivastava sparsifiers.
+This is formalized in Theorem~\ref{thm:cut-query}.
+
+Besides for cut queries, there is a long list of algorithms that run quickly on low arboricity
+graphs. These 
+which includes approximate maximum matching, approximate
+dominating set, and approximate vertex cover~\cite{Solomon18,
+Suomeloa12, KuhnW05, LinSS12, GoelG06}. Our result immediately implies
+that fast algorithms for computing any of these, exist given any of the
+spectral sparsifiers specified above. Approximate vertex cover on low-arboricity spectral
+sparsifiers has been used by Abraham et.al. in~\cite{AbrahamDKKP16} to
+compute $(1-\eps)$ undirected maximum bipartite flow.
+It remains an open question what the output of these algorithms on a
+spectral sparsifier $H$ of $G$, imply
+about the original graph $G$.  
+
+The existence of $O(\log^2 n / \eps^2)$ sparsifiers has been previously
+implied by Kyng and Song~\cite{KyngS18}, which shows that a $O(\log^2
+n / \eps^2)$ random spanning trees with edges re-weighted by their
+effective conductance, form a spectral sparsifier with high
+probability. It was previously known that this many random spanning
+trees was a cut-sparsifier with high probability~\cite{FungH10}. 

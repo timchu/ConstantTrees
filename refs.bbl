@@ -1,16 +1,17 @@
 \begin{thebibliography}{CC18}
 
+\bibitem[ADKKP16]{AbrahamDKKP16}
+  Ittai Abraham, David Durfee, Ioannis Koutis, Sebastian Krinninger,
+  Richard Peng
+\newblock On Fully Dynamic Graph Sparsifier.
+\newblock \textit{57th Annual IEEE Symposium on Foundations of Computer
+Science 2016}.
+
 \bibitem[AKW14]{AndoniKW14}
 Alexandr Andoni, Robert Krauthgamer, David Woodruff.
 \newblock The Sketching
 \\ Complexity of Graph Cuts.
 \newblock {\em CoRR}, abs/1403.7058, 2014.
-
-\bibitem[BSS09]{BatsonSS09}
-Joshua Batson, Daniel A. Spielman, and Nikhil Srivastava.
-\newblock Twice-Ramanujan
-\\ Sparsifiers.
-\newblock \textit{SIAM Review, Vol. $56$, Issue $2$, pp $315-334. 2014$}.
 
 \bibitem[BK96]{BenczurK96}
 Andras A. Benczur and David Karger.
@@ -18,25 +19,101 @@ Andras A. Benczur and David Karger.
 \newblock \textit{Proceedings of the 28th Annual ACM Symposium on Theory
     of Computing, STOC '96.}. pages 47-55. New York, NY, USA, 1996. ACM.
 
+\bibitem[BSS09]{BatsonSS09}
+Joshua Batson, Daniel A. Spielman, and Nikhil Srivastava.
+\newblock Twice-Ramanujan Sparsifiers.
+\\
+\newblock \textit{SIAM Review, Vol. $56$, Issue $2$, pp $315-334. 2014$}.
+
+
+\bibitem[CGPSSW18]{ChuGPSSW18}
+Timothy Chu, Yu Gao, Richard Peng, Sushant Sachdeva, Saurabh Sawlani,
+    Junxing Wang
+\newblock Graph Sparsification, Spectral Sketches, and Faster Resistance
+Computation, via Short Cycle Decompositions.
+\\
+\newblock \textit{Foundations of Comupter Science, 2018.} {\em
+CoRR}, abs/1805.12051, 2018.
+
 \bibitem[F61]{Foster61}
 R.M. Foster.
-\newblock An Extension of a Network Theorem
+\newblock An Extension of a Network Theorem. 
 \newblock IRE Trans. Circuit Theory, 8 (1961), pp.75-76.
+
+
+\bibitem[DKW15]{DinitzKW15}
+  Michael Dinitz, Robert Krauthgamer, Tal Wagner
+\newblock Towards Resistance Sparsifiers.
+\newblock \textit{Approximaion, Randomization, and Combinatorial
+Optimization. Algorithms and Techniques (APPROX/RANDOM 2015),}
+volume 40 of \textit{Leibniz International Proceedings in
+Informatics (LIPIcs)}, pages 738-755. Dagstuhl, Germany, 2015.
+Scholss-Dagstuhl-Leibniz-Zentrum fuer Informatik. 3
 
 \bibitem[FH10]{FungH10}
 Wai Shing Fung, Nicholas J. A. Harvey
-\newblock Graph Sparsification by Edge-Connectivity and Random Spanning Trees
+\newblock Graph Sparsification by Edge-Connectivity and Random Spanning
+    Trees.
 \newblock {\em CoRR}, abs/1005.0265, 2010.
+\bibitem[KL13]{KelnerL13}
+Jonathan A. Kelner and Alex Levin.
+    \newblock Spectral Sparsification in the semi-streaming setting. 
+    \newblock \textit{Theory of Computing Systems,} 53(2):243-262, 2013.
+
+
+\bibitem[GG06]{GoelG06}
+Gaurav Goel and Jens Gustedt.
+\newblock Bounded Arboricity to Determine the
+Local Structure of Sparse Graphs
+\newblock Lecture Notes in Computer Science book series (LNCS,
+volume 4271), 2006.
 
 \bibitem[KS18]{KyngS18}
 Rasmus Kyng, Zhao Song
-\newblock A Matrix Chernoff Bound for Strongly Rayleigh Distributions and Spectral Sparsifiers from a few Random Spanning Trees
+\newblock A Matrix Chernoff Bound for Strongly Rayleigh Distributions
+    and Spectral Sparsifiers from a few Random Spanning Trees.
+\\
 \newblock \textit{Foundations of Computer Science, 2018}.
+
+\bibitem[KPPS16]{KyngPPS16}
+  Rasmus Kyng, Jakub Pachocki, Richard Peng, Sushant Sachdeva
+\newblock A Framework for Analyzing Resparsification Algorithms
+\newblock \textit{Symposium on Discrete Algorithms, 2017}.
+
+\bibitem[KW05]{KuhnW05}
+Fabio Kuhn and Roger Wattenhofer.
+\newblock Constant-time distributed dominating set approximation.
+\newblock \textit{Distributed Computing,} 17(4):303-310, 2005.
+
+\bibitem[LSS12]{LinSS12}
+Min Chih Lin, Francisco J. Soulignac, Jayme L. Szwarcfiter.
+\newblock Arboricity, h-index, and dynamic algorithms.
+\newblock \textit{Theoretical Computer Science,} v407 n.1-3, p.458-473,
+November 2008.
 
 \bibitem[MSS13]{MarcusSS13}
 Adam Marcus, Daniel A. Spielman, and Nikhil Srivastava.
 \newblock Interlacing Families II: Mixed Characteristic Polynomials and the Kadison-Singer Problem.
 \newblock To appear in Annals of Mathematics.
+
+\bibitem[P16]{Pachocki16}
+  Jakub Pachocki
+\newblock Analysis of Resparsification
+\newblock {\em CoRR}, abs/1605.08194, 2016.
+
+\bibitem[S12]{Suomeloa12}
+Jukka Suomela. Survey of Local Algorithms.
+\newblock https://users.ics.aalto.fi/suomela/doc/local-survey.pdf
+
+\bibitem[S13]{Srivastava13}
+Nikhil Srivastava.
+\newblock Discrepancy, Graphs, and the Kadison-Singer \\ Problem.
+\newblock http://windowsontheory.org/2013/07/11/discrepancy-graphs-and-the-kadison-singer-conjecture-2/
+
+\bibitem[S18]{Solomon18}
+Shay Solomon.
+\newblock Local Algorithms for Bounded Degree Sparsifiers in Sparse Graphs.
+\newblock \textit{Proceedings of 9th ITCS}. 52:1--52:19, 2018.
 
 \bibitem[SS08]{SpielmanS08}
 Daniel A. Spielman and Nikhil Srivastava.
@@ -48,10 +125,4 @@ Daniel A. Spielman and Nikhil Srivastava.
 Daniel A. Spielman and Shan-Hua Teng.
 \newblock Nearly-Linear Time Algorithms for Graph Partitioning, Graph Sparsification, and Solving Linear Systems
 \newblock \textit{Proceedings of the $36^{th}$ Annual ACM Symposium on Theory of Computing, pp. $81-90. 2004$}
-
-\bibitem[S13]{Srivastava13}
-Nikhil Srivastava.
-\newblock Discrepancy, Graphs, and the Kadison-Singer \\ Problem.
-\newblock http://windowsontheory.org/2013/07/11/discrepancy-graphs-and-the-kadison-singer-conjecture-2/
-
 \end{thebibliography}

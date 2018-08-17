@@ -1,9 +1,27 @@
 \begin{abstract}
-We show that every graph has a $(1+\eps)$ spectral sparsifier with a
-$O(1/\eps^2)$ arboricity. Moreover, we show that a range of $(1+\eps)$
-sparsifiers that
-are based on leverage score sampling, have nearly constant arboricity
+We show that every graph has a spectral sparsifier with a
+constant arboricity. Moreover, we show that a range of $\eps$
+sparsifiers have nearly constant arboricity
 for constant $\epsilon$.
-This includes the sparsifiers of Spielman and Srivastava, the semi-streaming
-sparsifiers of Kelner-Levin and Kyng-Pachocki-Peng-Sachdeva, and more.
+This includes the spectral sparsifiers of Spielman and Srivastava, the semi-streaming
+spectral sparsifiers of Kelner-Levin and Kyng-Pachocki-Peng-Sachdeva,
+ and more.
+A wide range of algorithms that are otherwise time-consuming, are known
+to be efficient on graphs of low arboricity. This includes approximate
+vertex cover, approximate dominating set, cut-queries, and more.
+Previously, searching for classes of dynamic sparsifiers with low
+arboricity have allowed researchers to find fast algorithms for
+approximate undirected bipartite min-cut.
+
+Further, we discuss how the low arboricity of the Spielman
+Srivastava spectral sparsifier lets us compute any cut in a graph
+in time proportional to the vertex set size of the smaller side
+of the cut, with nearly linear pre-processing time. We hope that the
+efficiency of certain algorithms on graphs of low arboricity will
+continue to see algorithmic use.
+At the heart of our result is a simple statement, with a simple proof.
+It states: for any graph $G$, the subgraph of edges with leverage score
+$ > \alpha$ has arboricity $< O(1/ \alpha)$. This is sufficient to imply
+the low arboricity of all the sparsifiers mentioned above.
+
 \end{abstract}
